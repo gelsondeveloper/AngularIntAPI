@@ -1,13 +1,16 @@
-import { UsuarioComponent } from './usuario/usuario.component';
-import { HomeComponent } from './home/home.component';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent  },
-  { path: 'usuario', component: UsuarioComponent},
-  {path: '' , pathMatch: 'full', redirectTo: '/home'}
+  { path: 'home',
+   loadChildren: './home/home.module#HomeModule'
+   },
+   { path: 'usuario',
+   loadChildren: './usuario/usuario.module#UsuarioModule'
+   },
+   { path: '', redirectTo: '/home', pathMatch: 'full' }
 
   ];
 
@@ -15,7 +18,7 @@ const routes: Routes = [
   declarations: [],
   exports: [ RouterModule ],
   imports: [
-    CommonModule, RouterModule.forRoot(routes)
+    CommonModule, RouterModule.forRoot(routes, {useHash: true})
   ]
 })
 export class AppRoutingModule { }
